@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  max-width: 300px;
+}
+
+.button {
+  width: 100%;
+}
+
+.button__container {
+  width: 100%;
+  justify-content: center;
+}
