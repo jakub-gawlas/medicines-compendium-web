@@ -24,7 +24,13 @@ class ManagementPanel extends Component {
 
   render(){
     const { username } = storeUser;
-    const { medicinesNames, selectedMedicine, setSelectedMedicine } = storeMedicines;
+    const {
+      medicines,
+      contraindications, 
+      medicinesNames, 
+      selectedMedicine, 
+      setSelectedMedicine 
+    } = storeMedicines;
 
     return(
       <div className={styles.container}>
@@ -35,7 +41,11 @@ class ManagementPanel extends Component {
             onSelect={setSelectedMedicine}
           />
           { selectedMedicine &&
-            <MedicineForm medicine={selectedMedicine} />
+            <MedicineForm 
+              medicine={selectedMedicine}
+              allMedicines={medicines}
+              allContraindications={contraindications} 
+            />
           }
         </div>
       </div>

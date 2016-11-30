@@ -8,3 +8,15 @@
   width: 100vw;
   height: 100vh;
 }
+
+/* Override `antd` styles */
+
+.ant-alert {
+  display: flex;
+  align-items: center;
+  padding-left: 45px;
+}
+
+.ant-alert-icon {
+  top: inherit;
+}

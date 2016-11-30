@@ -27,7 +27,7 @@ class StoreUser {
         this.username = username;
         return;
       }
-      this.loginResponse = 'Cannot log in. Incorrect password or username.';
+      this.loginResponse = 'Niepoprawna nazwa użytkownika lub hasło.';
     }, 1000);
     
   }

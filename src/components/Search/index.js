@@ -15,6 +15,7 @@ function Search({ medicinesNames, onSelect }){
         dataSource={medicinesNames}
         onSelect={onSelect}
         className={styles.search__input}
+        placeholder="Wybierz lek"
       />
     </div>
   );

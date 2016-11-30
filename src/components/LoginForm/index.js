@@ -20,7 +20,7 @@ class LoginForm extends Component {
     return(
       <div className={styles.container}>
         <Spin spinning={isSpinning}>
-          <Card title="Medicines management">
+          <Card title="Panel logowania">
             <Form onSubmit={this.onSubmit}>
               <Form.Item>
                 <Input 
@@ -39,7 +39,7 @@ class LoginForm extends Component {
               </Form.Item>
               <Form.Item className={styles.button__container}>
                 <Button type="primary" htmlType="submit" className={styles.button}>
-                  Log in
+                  Zaloguj
                 </Button>
               </Form.Item>
             </Form>

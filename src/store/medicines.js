@@ -22,37 +22,7 @@ class StoreMedicines {
 
   @action
   setSelectedMedicine = (medicineName) => {
-    const medicine = this.medicines.find( ({ name }) => name === medicineName );
-    const { 
-      medicines: medicinesInteractions,
-      contraindications: contraindicationsInteractions
-    } = medicine.interactions;
-
-    this.selectedMedicine = {
-      ...medicine,
-      interactions: {
-        medicines: {
-          ids: medicinesInteractions,
-          names: this.getMedicinesName(medicinesInteractions)
-        },
-        contraindications: {
-          ids: contraindicationsInteractions,
-          names: this.getContraindicationsName(contraindicationsInteractions)
-        }
-      }
-    }
-  }
-
-  getMedicinesName = (medicinesIds) => {
-    return this.medicines
-            .filter(({ id }) => medicinesIds.includes(id) )
-            .map(({ name }) => name);
-  }
-
-  getContraindicationsName = (contraindicationsIds) => {
-    return this.contraindications
-            .filter(({ id }) => contraindicationsIds.includes(id) )
-            .map(({ name }) => name);
+    this.selectedMedicine = this.medicines.find( ({ name }) => name === medicineName );
   }
 
 }

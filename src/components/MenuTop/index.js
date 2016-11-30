@@ -8,18 +8,22 @@ import styles from './styles.css';
 function MenuTop ({ username, onClickMenu }) {
   return(
     <div className={styles.container}>
+      <span className={styles.logo}>
+        Kompendium leków
+        <small>| Panel administratora</small>
+      </span>
       <Menu mode="horizontal" onClick={onClickMenu}>
         <SubMenu title={(
           <span>
             <Icon type="user" />
-            Logged in as <strong>{username}</strong>
+            Zalogowany jako <strong>{username}</strong>
           </span>
           )}
         >
           <Item key="logout">
             <span>
               <Icon type="logout" />
-              Log out
+              Wyloguj
             </span>
           </Item>
         </SubMenu>
