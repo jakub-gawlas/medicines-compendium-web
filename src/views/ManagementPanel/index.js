@@ -12,7 +12,7 @@ import styles from './styles.css';
 
 @observer
 class ManagementPanel extends Component {
-  
+
   onClickMenu = ({ key }) => {
     const { logout } = storeUser;
 
@@ -20,6 +20,10 @@ class ManagementPanel extends Component {
       case 'logout': return logout();
       default: return;
     }
+  }
+
+  onClickButtonAdd = () => {
+    storeMedicines.setEmptySelectedMedicine();
   }
 
   render(){
@@ -41,6 +45,7 @@ class ManagementPanel extends Component {
           <Search 
             medicinesNames={medicinesNames} 
             onSelect={setSelectedMedicine}
+            onClickButtonAdd={this.onClickButtonAdd}
           />
           { selectedMedicine &&
             <MedicineForm

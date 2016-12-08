@@ -14,6 +14,19 @@ export async function getAllContraindications(){
   return response.data;
 }
 
+export async function addMedicine({ name, medicinesInteractions, contraindicationsInteractions }){
+  const data = {
+    name,
+    interactions: {
+      medicines: medicinesInteractions,
+      contraindications: contraindicationsInteractions
+    }
+  };
+  const response = await axios.post(`${API_URL}/medicines`, data);
+
+  return response.data;
+}
+
 export async function updateMedicine({ id, name, medicinesInteractions, contraindicationsInteractions }){
   const data = {
     name,
