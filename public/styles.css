@@ -9,7 +9,11 @@
   height: 100vh;
 }
 
-/* Override `antd` styles */
+/* 
+* Override `antd` styles 
+*/
+
+/* Alert */
 
 .ant-alert {
   display: flex;

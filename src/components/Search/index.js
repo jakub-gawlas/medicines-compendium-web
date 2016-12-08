@@ -16,6 +16,7 @@ function Search({ medicinesNames, onSelect }){
         onSelect={onSelect}
         className={styles.search__input}
         placeholder="Wybierz lek"
+        allowClear
       />
     </div>
   );

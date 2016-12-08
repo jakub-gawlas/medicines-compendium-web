@@ -29,7 +29,9 @@ class ManagementPanel extends Component {
       contraindications, 
       medicinesNames, 
       selectedMedicine, 
-      setSelectedMedicine 
+      setSelectedMedicine,
+      saveMedicine,
+      isSaveMedicineInProgress
     } = storeMedicines;
 
     return(
@@ -41,10 +43,12 @@ class ManagementPanel extends Component {
             onSelect={setSelectedMedicine}
           />
           { selectedMedicine &&
-            <MedicineForm 
+            <MedicineForm
               medicine={selectedMedicine}
               allMedicines={medicines}
               allContraindications={contraindications} 
+              onClickSave={saveMedicine}
+              isSpinning={isSaveMedicineInProgress}
             />
           }
         </div>

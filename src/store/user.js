@@ -3,7 +3,7 @@ import { observable, action } from 'mobx';
 class StoreUser {
 
   @observable 
-  isLoggedIn = true
+  isLoggedIn = false
 
   @observable
   isLoginInProgress = false
@@ -12,7 +12,7 @@ class StoreUser {
   loginResponse = ''
 
   @observable
-  username = 'foo'
+  username = ''
 
   @action
   login = ({ username, password }) => {
