@@ -13,3 +13,16 @@ export async function getAllContraindications(){
 
   return response.data;
 }
+
+export async function updateMedicine({ id, name, medicinesInteractions, contraindicationsInteractions }){
+  const data = {
+    name,
+    interactions: {
+      medicines: medicinesInteractions,
+      contraindications: contraindicationsInteractions
+    }
+  };
+  const response = await axios.put(`${API_URL}/medicines/${id}`, data);
+
+  return response.data;
+}

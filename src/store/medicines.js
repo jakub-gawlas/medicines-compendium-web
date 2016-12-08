@@ -1,6 +1,6 @@
 import { observable, computed, action } from 'mobx';
 
-import { getAllMedicines, getAllContraindications } from '../api';
+import { getAllMedicines, getAllContraindications, updateMedicine } from '../api';
 
 class StoreMedicines {
 
@@ -44,23 +44,56 @@ class StoreMedicines {
   }
 
   @action
-  saveMedicine = ({ id, name, medicinesInteractions, contraindicationsInteractions }) => {
+  saveMedicine = async (medicineToSave) => {
     this.isSaveMedicineInProgress = true;
-    this.medicines = this.medicines.map((medicine) => {
-      if(medicine.id !== id) return medicine;
-      return {
-        ...medicine,
-        name,
-        interactions: {
-          medicines: medicinesInteractions,
-          contraindications: contraindicationsInteractions 
-        }
-      };
-    });
 
-    setTimeout(() => this.isSaveMedicineInProgress = false, 500);
+    try {
+      const result = await updateMedicine(medicineToSave);
+      const { updatedMedicine, changedMedicines } = result;
+
+      this.medicines = this.medicines.map((medicine) => {
+
+        if(changedMedicines.interactions.added.includes(medicine.id)){
+          medicine.interactions.medicines.push(medicineToSave.id);
+        }
+        if(changedMedicines.interactions.removed.includes(medicine.id)){
+          const interactions = medicine.interactions;
+          interactions.medicines = interactions.medicines.filter((id) => id !== medicineToSave.id);
+        }
+
+        if(medicine.id !== medicineToSave.id) return medicine;
+
+        return {
+          ...medicine,
+          name: updatedMedicine.name,
+          interactions: {
+            medicines: updatedMedicine.interactions.medicines,
+            contraindications: updatedMedicine.interactions.contraindications 
+          }
+        };
+
+      });
+           
+    }
+    catch(err){
+      console.error(err);
+    }
+    
+    this.isSaveMedicineInProgress = false;
   }
 
+}
+
+function _removeMedicineInteraction(medicine, interactionId){
+  const { interactions } = medicine; 
+  const medicinesInteractions = interactions.medicines.filter((id) => id !== interactionId);
+  return {
+    ...medicine,
+    interactions: {
+      medicines: medicinesInteractions,
+      contraindications: interactions.contraindications
+    }
+  };
 }
 
 const storeMedicines = new StoreMedicines();
