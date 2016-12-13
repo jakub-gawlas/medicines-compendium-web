@@ -3,6 +3,7 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
 import { Spin, Card, Form, Input, Select, Button } from 'antd';
+import Toolbar from './Toolbar';
 
 import styles from './styles.css';
 
@@ -78,11 +79,13 @@ class MedicineForm extends Component {
   }
 
   render(){
-    const { isSpinning } = this.props;
+    const { isSpinning, onClickDelete } = this.props;
+
     return(
       <div className={styles.container}>
         <Spin spinning={isSpinning}>
           <Card>
+            <Toolbar onClickDelete={onClickDelete} />
             <Form onSubmit={this.onSubmit}>
               <Form.Item label="Nazwa">
                 <Input 

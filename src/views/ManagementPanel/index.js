@@ -35,6 +35,7 @@ class ManagementPanel extends Component {
       selectedMedicine, 
       setSelectedMedicine,
       saveMedicine,
+      deleteMedicine,
       isSaveMedicineInProgress
     } = storeMedicines;
 
@@ -53,6 +54,7 @@ class ManagementPanel extends Component {
               allMedicines={medicines}
               allContraindications={contraindications} 
               onClickSave={saveMedicine}
+              onClickDelete={() => deleteMedicine(selectedMedicine.id)}
               isSpinning={isSaveMedicineInProgress}
             />
           }

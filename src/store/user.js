@@ -27,6 +27,8 @@ class StoreUser {
       this.loginResponse = '';
     }
     catch(err){
+      console.error(err);
+      
       this.loginResponse = 'Niepoprawna nazwa użytkownika lub hasło.';
     }
 

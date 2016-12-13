@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button--remove {
+  color: #b15555;
+  border-color: #b15555;
+}
+
+.button--remove:hover {
+  color: #dc3535;
+  border-color: #dc3535;
+}

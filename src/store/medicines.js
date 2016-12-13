@@ -1,6 +1,12 @@
 import { observable, computed, action } from 'mobx';
 
-import { getAllMedicines, getAllContraindications, addMedicine, updateMedicine } from '../api';
+import { 
+  getAllMedicines, 
+  getAllContraindications, 
+  addMedicine, 
+  updateMedicine,
+  deleteMedicine 
+} from '../api';
 
 class StoreMedicines {
 
@@ -119,6 +125,43 @@ class StoreMedicines {
     }
   }
 
+  @action
+  deleteMedicine = async (medicineId) => {
+    try {
+      await deleteMedicine(medicineId);
+      
+      /** Remove medicine from list */
+      this.medicines = this.medicines.filter(({ id }) => id !== medicineId);
+
+      /** Remove medicine from interactions lists */
+      this.medicines = this.medicines.map((medicine) => {
+        const { interactions } = medicine;
+
+        if(!interactions.medicines.includes(medicineId)){
+          return medicine;
+        }
+
+        const medicinesInteractions = _removeValueFromArray(interactions.medicines, medicineId);
+        return {
+          ...medicine,
+          interactions: {
+            ...interactions,
+            medicines: medicinesInteractions
+          }
+        };
+      });
+
+      this.selectedMedicine = null;
+    }
+    catch(err){
+      console.error(err);
+    }
+  }
+
+}
+
+function _removeValueFromArray(array, valueToRemove){
+  return array.filter((value) => value !== valueToRemove);
 }
 
 const storeMedicines = new StoreMedicines();

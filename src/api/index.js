@@ -50,3 +50,9 @@ export async function updateMedicine({ id, name, medicinesInteractions, contrain
 
   return response.data;
 }
+
+export async function deleteMedicine(id){
+  const response = await axios.delete(`${API_URL}/medicines/${id}`);
+
+  return response.data;
+} 
