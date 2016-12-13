@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 
-import { loginUser } from '../api';
+import * as api from '../api';
 
 class StoreUser {
 
@@ -21,7 +21,7 @@ class StoreUser {
     this.isLoginInProgress = true;
 
     try {
-      await loginUser({ username, password });
+      await api.loginUser({ username, password });
       this.isLoggedIn = true;
       this.username = username;
       this.loginResponse = '';

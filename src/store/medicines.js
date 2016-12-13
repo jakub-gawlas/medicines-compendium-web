@@ -1,12 +1,6 @@
 import { observable, computed, action } from 'mobx';
 
-import { 
-  getAllMedicines, 
-  getAllContraindications, 
-  addMedicine, 
-  updateMedicine,
-  deleteMedicine 
-} from '../api';
+import * as api from '../api';
 
 class StoreMedicines {
 
@@ -33,8 +27,8 @@ class StoreMedicines {
   @action
   async downloadData(){
     try {
-      const medicines = await getAllMedicines();
-      const contraindications = await getAllContraindications();
+      const medicines = await api.getAllMedicines();
+      const contraindications = await api.getAllContraindications();
 
       this.medicines = medicines;
       this.contraindications = contraindications;
@@ -76,7 +70,7 @@ class StoreMedicines {
   @action
   addMedicine = async (medicineToAdd) => {
     try {
-      const addedMedicine = await addMedicine(medicineToAdd);
+      const addedMedicine = await api.addMedicine(medicineToAdd);
       this.medicines = this.medicines.map((medicine) => {
         if(addedMedicine.interactions.medicines.includes(medicine.id)){
           medicine.interactions.medicines.push(addedMedicine.id);
@@ -93,7 +87,7 @@ class StoreMedicines {
   @action
   updateMedicine = async (medicineToUpdate) => {
     try {
-      const result = await updateMedicine(medicineToUpdate);
+      const result = await api.updateMedicine(medicineToUpdate);
       const { updatedMedicine, changedMedicines } = result;
 
       this.medicines = this.medicines.map((medicine) => {
@@ -128,7 +122,7 @@ class StoreMedicines {
   @action
   deleteMedicine = async (medicineId) => {
     try {
-      await deleteMedicine(medicineId);
+      await api.deleteMedicine(medicineId);
       
       /** Remove medicine from list */
       this.medicines = this.medicines.filter(({ id }) => id !== medicineId);
