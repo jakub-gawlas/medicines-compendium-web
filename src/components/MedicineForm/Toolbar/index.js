@@ -4,17 +4,19 @@ import { Button } from 'antd';
 
 import styles from './styles.css';
 
-function Toolbar({ onClickDelete }){
+function Toolbar({ onClickDelete, showDeleteButton }){
   return(
     <div className={styles.container}>
-      <Button 
-        type="dashed" 
-        icon="delete"
-        onClick={onClickDelete}
-        className={styles['button--remove']}
-      >
-        Usuń lek
-      </Button>
+      {showDeleteButton &&
+        <Button 
+          type="dashed" 
+          icon="delete"
+          onClick={onClickDelete}
+          className={styles['button--remove']}
+        >
+          Usuń lek
+        </Button>
+      }
     </div>
   );
 }

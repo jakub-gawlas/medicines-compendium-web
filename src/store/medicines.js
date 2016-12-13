@@ -63,7 +63,7 @@ class StoreMedicines {
         await this.updateMedicine(medicineToSave) 
       :
         await this.addMedicine(medicineToSave);
-
+    
     this.isSaveMedicineInProgress = false;
   }
 
@@ -71,13 +71,16 @@ class StoreMedicines {
   addMedicine = async (medicineToAdd) => {
     try {
       const addedMedicine = await api.addMedicine(medicineToAdd);
+
       this.medicines = this.medicines.map((medicine) => {
         if(addedMedicine.interactions.medicines.includes(medicine.id)){
           medicine.interactions.medicines.push(addedMedicine.id);
         }
         return medicine;
       });
+
       this.medicines.push(addedMedicine);
+      this.selectedMedicine = addedMedicine;
     }
     catch(err){
       console.error(err);

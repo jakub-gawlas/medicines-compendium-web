@@ -79,13 +79,16 @@ class MedicineForm extends Component {
   }
 
   render(){
-    const { isSpinning, onClickDelete } = this.props;
+    const { isSpinning, onClickDelete, medicine } = this.props;
 
     return(
       <div className={styles.container}>
         <Spin spinning={isSpinning}>
           <Card>
-            <Toolbar onClickDelete={onClickDelete} />
+            <Toolbar 
+              onClickDelete={onClickDelete} 
+              showDeleteButton={!!medicine.id}
+            />
             <Form onSubmit={this.onSubmit}>
               <Form.Item label="Nazwa">
                 <Input 
