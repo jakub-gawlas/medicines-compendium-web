@@ -1,5 +1,7 @@
 import { observable, action } from 'mobx';
 
+import { loginUser } from '../api';
+
 class StoreUser {
 
   @observable 
@@ -15,21 +17,20 @@ class StoreUser {
   username = ''
 
   @action
-  login = ({ username, password }) => {
-
+  login = async ({ username, password }) => {
     this.isLoginInProgress = true;
 
-    setTimeout(() => {
-      this.isLoginInProgress = false;
-      if( username === 'foo' && password === 'bar'){
-        this.loginResponse = '';
-        this.isLoggedIn = true;
-        this.username = username;
-        return;
-      }
+    try {
+      await loginUser({ username, password });
+      this.isLoggedIn = true;
+      this.username = username;
+      this.loginResponse = '';
+    }
+    catch(err){
       this.loginResponse = 'Niepoprawna nazwa użytkownika lub hasło.';
-    }, 1000);
-    
+    }
+
+    this.isLoginInProgress = false;
   }
 
   @action
